@@ -12,4 +12,27 @@ export function getQuiz(req, res) {
       res.send(quizData)
     }else {
       res.send("Error: file dosen't exist")}
+<<<<<<< HEAD
+
+    }
+
+export function saveQuiz(req, res){
+
+
+  const quiz = req.body;
+  const title = "quiz";
+  
+    fs.writeFile(`uploadedQuiz/${title}.json`,  JSON.stringify(quiz), (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: `Failed to save Quiz: ${title}` });
+      }
+  
+      res.status(200).json({ message: `Quiz: ${title} saved successfully` });
+    });
+  
+  
+  }
+=======
 }
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5

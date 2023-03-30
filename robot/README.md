@@ -30,7 +30,10 @@ Once running, we can publish and listen to topics as follows:
 3. source devel/setup.bash
 4. export ROS_MASTER_URI=http://192.168.0.102:11311
 5. Launch Web socket
-6. export ROS_IP to allow for publishing //setting this prevents from local comms
+6. export ROS_IP=192.168.0.101 to allow for publishing //setting this prevents from local comms
+7. Set IP in pdfService.js
+8. Delete images in splitPDFs
+9. Run python src/robot_gui_bridge/forwarder.py &
 
 
 ## Resources

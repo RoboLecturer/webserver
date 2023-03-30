@@ -17,14 +17,10 @@ export class RosInterface {
   quiz_starter: any = null;
   control_publisher: any = null;
   next_question_publisher: any = null;
-  onQuizTriggered: (msg: any) => void;
-  onChangeSlide: (msg: any) => void;
   currentSlide = 0;
 
-  constructor(ws_url = "ws://localhost:9000", onQuizTriggered: (msg: any) => void, onChangeSlide: (msg: any) => void) {
+  constructor(ws_url:any,) {
     this.ws_url = ws_url;
-    this.onQuizTriggered = onQuizTriggered;
-    this.onChangeSlide = onChangeSlide;
   }
 
   connect() {
@@ -67,14 +63,25 @@ export class RosInterface {
 
   publishTakeControl(message: ROSLIB.Message): void {
     this.control_publisher.publish(message);
+    // setTimeout(() => {
+    //   this.control_publisher.publish(message);
+    // }, 1000);
   }
 
   publishStartQuiz(message: ROSLIB.Message): void {
-    this.quiz_starter.publish(message);
+    console.log("Starting")
+    this.quiz_starter.publish({data:"1"});
+    // setTimeout(() => {
+    //   this.quiz_starter.publish(message);
+    // }, 1000);
   }
 
   publishNextQuestion(message: ROSLIB.Message): void {
+    console.log("Nexting...")
     this.next_question_publisher.publish(message);
+    // setTimeout(() => {
+    //   this.next_question_publisher.publish(message);
+    // }, 1000);
   }
 
   onSlide(msg: any) {
