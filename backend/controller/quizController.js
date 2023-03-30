@@ -12,6 +12,7 @@ export function getQuiz(req, res) {
       res.send(quizData)
     }else {
       res.send("Error: file dosen't exist")}
+<<<<<<< HEAD
 
     }
 
@@ -32,3 +33,6 @@ export function saveQuiz(req, res){
   
   
   }
+=======
+}
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5

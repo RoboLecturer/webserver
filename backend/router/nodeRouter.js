@@ -3,7 +3,11 @@ const router = Router();
 import { parsePDF, uploadPDF } from "../controller/pdfController.js";
 import multer from "multer";
 import path from "path";
+<<<<<<< HEAD
 import { getQuiz,saveQuiz } from "../controller/quizController.js";
+=======
+import { getQuiz } from "../controller/quizController.js";
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
 import {
   addResult,
   resetResults,
@@ -18,7 +22,11 @@ import {
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if (file.fieldname === "pdf") {
+<<<<<<< HEAD
       cb(null, "../pepperweb/public/");
+=======
+      cb(null, "../pepperweb/public/uploadedPDFs");
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
     } else if (file.fieldname === "quiz") {
       cb(null, "uploadedQuiz/");
     } else {
@@ -42,11 +50,16 @@ router.post("/upload_pdf", uploadParams, uploadPDF);
 
 // process the pdf (should be called after upload pdf)
 router.post("/pdf", parsePDF);
+<<<<<<< HEAD
 
 // use filename to get quiz JSON info
 router.get("/quiz", getQuiz);
 // save quiz from NLP locally
 router.post("/saveQuiz",saveQuiz)
+=======
+// use filename to get quiz JSON info
+router.get("/quiz", getQuiz);
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
 
 // list the file names of uploaded pdfs
 router.get("/uploadedFileNames", uploadedFileNames);

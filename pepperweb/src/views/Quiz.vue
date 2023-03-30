@@ -22,10 +22,15 @@
           </h1>
           <h1 v-if="quizInitiated">{{ startTimer }}</h1>
         </div>
+<<<<<<< HEAD
         <div v-if="!quizInitiated" class="container">
           <div class="usernameWrapper">
             <p class="username" v-for="(user, index) in users" :key="index">{{ user["Username"] }}</p>
           </div>
+=======
+        <div v-if="!quizInitiated" class="row s9 m9 l9">
+          <p v-for="(user, index) in users" :key="index">{{ user["Username"] }}</p>
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
         </div>
       </div>
     </div>
@@ -63,9 +68,12 @@ Vue.registerHooks(["beforeRouteLeave"]);
 @Options({ components: { ResultBarChar } })
 export default class Quiz extends Vue {
   api_url: any;
+<<<<<<< HEAD
   ws_url: any;
   ros_ws_url: any;
   ip_address: any;
+=======
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
   $cookies: any;
   $http: any;
   questions = [];
@@ -92,9 +100,22 @@ export default class Quiz extends Vue {
     "#1ddee8",
     "#1de83f",
   ];
+<<<<<<< HEAD
   webSocket: any = null;
   rosInterface!: RosInterface;
   statusText = "";
+=======
+  rosInterface: RosInterface = new RosInterface(
+    "ws://localhost:9000",
+    () => {
+      return;
+    },
+    () => {
+      return;
+    }
+  );
+  statusText = "Waiting for users to join...";
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
   users = [];
 
   async getUsersInLobby(): Promise<void> {
@@ -134,8 +155,11 @@ export default class Quiz extends Vue {
     if (resp.status == 200) {
       console.log(resp.data);
       this.leaderboard = resp.data;
+<<<<<<< HEAD
       let winner = this.leaderboard[0]["Username"]
       this.webSocket.send("Winner|"+winner);
+=======
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
       this.quizOver = true;
     } else {
       console.log(resp);
@@ -144,7 +168,11 @@ export default class Quiz extends Vue {
 
   async fetchQuiz(): Promise<void> {
     let resp = await this.$http.get(`${this.api_url}/quiz`, {
+<<<<<<< HEAD
       params: { name: "quiz" },
+=======
+      params: { name: "test" },
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
     });
 
     if (resp.status == 200) {
@@ -161,7 +189,10 @@ export default class Quiz extends Vue {
     this.quizStarted = false;
     this.showResults = false;
     this.quizInitiated = true;
+<<<<<<< HEAD
     this.webSocket.send("start quiz");
+=======
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
     this.rosInterface.publishStartQuiz({ data: "1" }); //starts 5 second timer on all clients
     if (this.questionIndex > 0) {
       this.statusText = "Next question in...";
@@ -186,8 +217,12 @@ export default class Quiz extends Vue {
 
   incrementQuestion(): void {
     if (this.questionIndex != this.questions.length - 1) {
+<<<<<<< HEAD
       this.rosInterface.publishNextQuestion({ data: "data" });
       this.webSocket.send("next question");
+=======
+      this.rosInterface.publishNextQuestion({ data: "" });
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
       this.questionIndex++;
       this.startQuiz();
     } else {
@@ -241,6 +276,7 @@ export default class Quiz extends Vue {
     }
   }
 
+<<<<<<< HEAD
   connect(): void {
     this.webSocket = new WebSocket(this.ws_url);
     this.webSocket.onmessage = (event: any) => {
@@ -252,6 +288,9 @@ export default class Quiz extends Vue {
     this.statusText = `Go to http://${this.ip_address}:8080 to join...`;
     this.connect();
     this.rosInterface = new RosInterface(this.ros_ws_url);
+=======
+  mounted(): void {
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
     this.rosInterface.connect();
     // console.log(this.$cookies.get("quizCookie"));
     this.resetResults();
@@ -263,7 +302,10 @@ export default class Quiz extends Vue {
         // As the user releases the Ctrl key, the key is no longer active,
         // so event.ctrlKey is false.
         if (keyName === "q") {
+<<<<<<< HEAD
           this.webSocket.send("quiz over");
+=======
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
           this.rosInterface.publishTakeControl({ data: "Quiz over." });
           this.$router.push({
             name: "Slides",
@@ -295,10 +337,19 @@ export default class Quiz extends Vue {
     this.fetchQuiz();
     setInterval(this.getUsersInLobby, 2000);
   }
+<<<<<<< HEAD
+=======
+
+  // beforeRouteLeave() {
+  //   console.log("Before leave quiz")
+  //   // this.rosInterface.disconnect();
+  // }
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
 }
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .usernameWrapper {
   display: flex;
   justify-content: space-evenly;
@@ -310,6 +361,8 @@ export default class Quiz extends Vue {
   font-size: 20px;
   font-weight: 600;
 }
+=======
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
 .statusText {
   padding: 0px 100px 0px 100px;
 }

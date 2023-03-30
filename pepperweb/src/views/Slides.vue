@@ -1,7 +1,11 @@
 <template>
   <div class="slide">
     <pdf
+<<<<<<< HEAD
       src="AstronomyPresentation.pdf"
+=======
+      src="ICL_EEE_CVPR_Part2.pdf"
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
       :page="currentPage"
       scale.sync="page-width"
       :resize="true"
@@ -26,14 +30,22 @@ export default class Slides extends Vue {
   $router: any;
   ros: any = null;
   $cookies: any;
+<<<<<<< HEAD
   ws_url: any;
   ros_ws_url:any;
+=======
+  ws_url = "ws://localhost:9000";
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
   connected = false;
   text_listener!: ROSLIB.Topic;
   quiz_listener!: ROSLIB.Topic;
   slide_listener!: ROSLIB.Topic;
   control_publisher!: ROSLIB.Topic;
+<<<<<<< HEAD
   webSocket:any = null;
+=======
+
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
   currentPage = 1;
   numPages = 0;
 
@@ -41,6 +53,7 @@ export default class Slides extends Vue {
     this.numPages = pages;
   }
 
+<<<<<<< HEAD
   onQuizTriggered(msg: any): void {
     console.log(msg.data);
     if (msg.data == "1") {
@@ -55,6 +68,21 @@ export default class Slides extends Vue {
     var split = msg.data.split("|");
     var action = split[0];
     var value = Number.parseInt(split[1]);
+=======
+  onQuizTriggered(msg: ROSLIB.Message): void {
+    console.log(msg);
+    // this.$cookies.set("quizCookie", "this is a global cookie");
+    this.$router.push({
+      name: "Quiz",
+    });
+  }
+
+  onChangeSlide(msg: any): void {
+    var split = msg.data.split("|");
+    var action = split[0];
+    var value = Number.parseInt(split[1]);
+    console.log(msg.data);
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
     this.changePage(action, value);
   }
 
@@ -81,6 +109,7 @@ export default class Slides extends Vue {
   }
 
   connect(): void {
+<<<<<<< HEAD
     this.webSocket =  new WebSocket(this.ws_url);
     this.webSocket.onmessage = (event:any) => {
       console.log(event);
@@ -88,6 +117,10 @@ export default class Slides extends Vue {
 
     this.ros = new ROSLIB.Ros({
       url: this.ros_ws_url,
+=======
+    this.ros = new ROSLIB.Ros({
+      url: this.ws_url,
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
     });
 
     this.ros.on("connection", () => {
@@ -117,7 +150,11 @@ export default class Slides extends Vue {
       messageType: "std_msgs/String",
       queue_length: 10,
       throttle_rate: 1,
+<<<<<<< HEAD
       reconnect_on_close: true,
+=======
+      reconnect_on_close:true,
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
     });
     this.slide_listener.subscribe(this.onChangeSlide);
 
@@ -163,7 +200,11 @@ export default class Slides extends Vue {
   // beforeRouteLeave() {
   //   console.log("BEFORE RL")
 
+<<<<<<< HEAD
   //   this.ros.close();
+=======
+  //   // this.ros.close();
+>>>>>>> 9be6be8e37649dd3e81210f03e15833a31cf98b5
   // }
 }
 </script>
